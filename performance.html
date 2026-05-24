@@ -384,7 +384,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             const duration = 1500; // Durasi kelajuan animasi (1.5 saat)
 
-            // A. Animasi untuk Nombor Integer (Cth: 110, 96, 14, 2)
+            // A. Animation for Integer Numbers (E.g., 110, 96, 14, 2)
             document.querySelectorAll('.data-animate-int').forEach(el => {
                 const target = parseInt(el.getAttribute('data-target'), 10);
                 let start = 0;
@@ -394,7 +394,7 @@
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
                     
-                    // Kesan pergerakan lancar (EaseOutQuad)
+                    // Smooth transition effect (EaseOutQuad)
                     const easeProgress = progress * (2 - progress);
                     const currentVal = Math.floor(easeProgress * target);
                     
@@ -409,10 +409,10 @@
                 requestAnimationFrame(updateCount);
             });
 
-            // B. Animasi untuk Nombor Perpuluhan (Cth: 4.8, 95.6, 1.8, 4.87)
+          // B. Animation for Decimal Numbers (E.g., 4.8, 95.6, 1.8, 4.87)
             document.querySelectorAll('.data-animate-float').forEach(el => {
                 const target = parseFloat(el.getAttribute('data-target'));
-                // Semak berapa titik perpuluhan asal pada data-target
+                // Check original decimal count from data-target
                 const decimals = el.getAttribute('data-target').split('.')[1]?.length || 1;
                 const startTime = performance.now();
 
@@ -434,8 +434,8 @@
                 requestAnimationFrame(updateFloat);
             });
 
-            // C. Animasi Tiang Kemajuan Hijau (Rating Progress Bars 5 & 4)
-            // Timeout diletakkan sedikit supaya ada delay peralihan css transition
+            // C. Animation for Green Progress Bars (Rating Progress Bars 5 & 4)
+// Added a slight timeout to trigger the CSS transition delay
             setTimeout(() => {
                 document.querySelectorAll('.data-animate-bar').forEach(bar => {
                     const finalWidth = bar.getAttribute('data-width');
