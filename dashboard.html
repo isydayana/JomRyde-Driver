@@ -361,23 +361,23 @@
             run();
         }
 
-        // Jalankan animasi nombor sebaik sahaja halaman siap dimuatkan (bila masuk dashboard)
+        // Run the counter animation as soon as the page finishes loading (upon entering the dashboard)
         window.addEventListener('DOMContentLoaded', () => {
-            // 1. Today's Earnings (Sasaran: RM 305.00)
+            // 1. Today's Earnings (target: RM 305.00)
             animateValue("statEarnings", 0, 305.00, 1500, (val) => "RM " + val.toFixed(2));
             
-            // 2. Today's Trips (Sasaran: 23)
+            // 2. Today's Trips (target: 23)
             animateValue("statTrips", 0, 24, 1500, (val) => Math.floor(val) + " Rides");
             
-            // 3. Online Time (Sasaran: 8h 15m) -> Animasi jam bergerak, minit dikira secara nisbah
+            // 3. Online Time (target: 8h 15m) -> Clock movement animation, minutes are calculated proportionally
             animateValue("statHours", 0, 8, 1500, (val) => {
                 const hours = Math.floor(val);
-                // Simulasi minit bergerak selari dengan jam menuju ke 15 minit
+                // Simulate minutes moving in sync with the hours toward the 15-minute mark
                 const minutes = Math.floor((val / 8) * 15); 
                 return `${hours}h ${minutes}m`;
             });
             
-            // 4. Average Rating (Sasaran: 4.8)
+            // 4. Average Rating (target: 4.8)
             animateValue("statRating", 0, 4.8, 1500, (val) => val.toFixed(1) + ' <span class="text-amber-400 text-sm">★</span>');
         });
 
@@ -386,7 +386,7 @@
         // 3. CHART.JS CONFIGURATION & ENHANCED INITIAL ANIMATION
         // -----------------------------------------------------
 
-        // Tetapan asas animasi global untuk semua carta supaya ia bergerak dari 0
+       // Set global base animations for all charts to start from 0
         const chartAnimationConfig = {
             duration: 2000,
             easing: 'easeOutQuart'
@@ -419,7 +419,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: chartAnimationConfig, // Ditambah animasi bergerak
+                animation: chartAnimationConfig, 
                 plugins: { legend: { display: false } },
                 scales: {
                     y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { color: '#94a3b8' } },
@@ -446,7 +446,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: chartAnimationConfig, // Ditambah animasi bergerak
+                animation: chartAnimationConfig, 
                 plugins: { legend: { display: false } },
                 scales: {
                     y: { beginAtZero: true, grid: { color: '#f8fafc' }, ticks: { color: '#94a3b8' } },
@@ -472,7 +472,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: chartAnimationConfig, // Ditambah animasi bergerak berpusing/membesar
+                animation: chartAnimationConfig, 
                 plugins: {
                     legend: {
                         position: 'bottom',
