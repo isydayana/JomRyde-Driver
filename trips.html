@@ -945,28 +945,26 @@
 
         // --- 6. NEW DYNAMIC TRIP TAB SWITCHER FUNCTION ---
         function switchTripTab(tabName) {
-            // Sembunyikan semua panel kandungan terlebih dahulu
             const panels = document.querySelectorAll('.trip-panel');
             panels.forEach(panel => {
                 panel.classList.remove('block');
                 panel.classList.add('hidden');
             });
 
-            // Reset gaya semua butang tab ke keadaan tidak aktif (kelabu)
             const buttons = document.querySelectorAll('button[id^="tabBtn-"]');
             buttons.forEach(btn => {
                 btn.classList.remove('border-emerald-600', 'text-emerald-600');
                 btn.classList.add('border-transparent', 'text-gray-400');
             });
 
-            // Paparkan panel yang aktif
+            // Display the active panel
             const targetPanel = document.getElementById('panel-' + tabName);
             if (targetPanel) {
                 targetPanel.classList.remove('hidden');
                 targetPanel.classList.add('block');
             }
 
-            // Berikan highlight warna hijau emerald pada butang tab yang diklik
+            // Apply emerald green highlight to the clicked tab button
             const targetButton = document.getElementById('tabBtn-' + tabName);
             if (targetButton) {
                 targetButton.classList.remove('border-transparent', 'text-gray-400');
