@@ -1,0 +1,94 @@
+/* style.css */
+
+/* Latar belakang bertema gradien hijau & bandar lembut */
+.bg-city-pattern {
+    background-color: #DADADA;
+    background-image: linear-gradient(to top, rgba(220, 252, 231, 0.4) 0%, rgba(255, 255, 255, 0.9) 100%);
+    position: relative;
+}
+
+/* Hiasan pin lokasi di bahagian tengah seiring kad */
+.map-pin {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #16a34a;
+    font-size: 28px;
+    opacity: 0.7;
+}
+
+
+/* ==== bank file ========= /
+/* =========================================================================
+   GLOBAL OVERRIDES AND INITIALIZATION
+   ========================================================================= */
+
+/* Custom background pattern configuration for the body framework */
+.bg-city-pattern {
+    background-color: #f8fafc; /* Tailwind gray-50 fallback background layer color */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* =========================================================================
+   UI EXTENSION UTILITIES & SCROLLBAR DESIGN
+   ========================================================================= */
+
+/* Custom global scrollbar specifications for sleek visual feedback layout updates */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9; /* Slate gray styling fallback background trail tracking line */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* Smooth slate-300 standard dynamic control capsule indicator */
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #10b981; /* Changes palette accents to dynamic emerald emerald-500 on action hover state */
+}
+
+
+
+/* ====== dashboard file =======*/
+
+/* =========================================================================
+   GLOBAL OVERRIDES AND INITIALIZATION
+   ========================================================================= */
+
+/* Custom background pattern configuration for the body framework */
+.bg-city-pattern {
+    background-color: #f8fafc; /* Tailwind gray-50 fallback background layer color */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* =========================================================================
+   UI EXTENSION UTILITIES & SCROLLBAR DESIGN
+   ========================================================================= */
+
+/* Custom global scrollbar specifications for sleek visual feedback layout updates */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9; /* Slate gray styling fallback background trail tracking line */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* Smooth slate-300 standard dynamic control capsule indicator */
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #10b981; /* Changes palette accents to dynamic emerald emerald-500 on action hover state */
+}

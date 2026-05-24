@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JomRyde - My Trips</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-city-pattern min-h-screen font-sans antialiased text-gray-800 flex flex-col relative overflow-x-hidden">
+
+   <header class="bg-gradient-to-r from-emerald-800 to-teal-950 shadow-lg sticky top-0 z-40 w-full">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
+        <div class="flex items-center gap-4">
+            <button id="menuBtn" class="text-white text-xl focus:outline-none hover:text-emerald-400 transition-all cursor-pointer">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <a href="dashboard.html" class="flex items-center gap-2 text-xl font-bold text-white hover:opacity-90 transition-all cursor-pointer">
+                <i class="fa-solid fa-car text-emerald-400"></i>
+                <span>Jom<span class="text-emerald-400">Ryde</span><span class="text-xs font-normal text-emerald-300 ml-1 uppercase tracking-wider hidden sm:inline">Driver</span></span>
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4 relative">
+            
+            <button id="notiBtn" class="text-white relative text-lg hover:text-emerald-400 transition-all cursor-pointer p-2 bg-white/5 rounded-full backdrop-blur-sm focus:outline-none">
+                <i class="fa-solid fa-bell"></i>
+                <span class="absolute top-1.5 right-1.5 bg-red-500 w-2 h-2 rounded-full"></span>
+            </button>
+
+            <button id="profileDropdownBtn" class="w-11 h-11 rounded-full border-2 border-emerald-400/60 overflow-hidden shadow-sm hover:border-emerald-300 transition-all cursor-pointer focus:outline-none flex items-center justify-center">
+                <img src="driver picture.png" alt="Driver Profile" class="w-full h-full object-cover scale-110">
+            </button>
+
+            <div id="profileDropdown" class="absolute right-0 top-14 w-48 bg-white rounded-xl shadow-xl border border-gray-100 hidden py-2 z-50">
+                <div class="px-4 py-2 border-b border-gray-50">
+                    <p class="text-xs font-bold text-gray-900">Muhammad Asyraf</p>
+                    <p class="text-[10px] text-gray-400">Driver Account</p>
+                </div>
+                
+                <a href="profile.html" class="flex items-center gap-2 px-4 py-2.5 text-xs text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition-all">
+                    <i class="fa-regular fa-user text-sm"></i> See Profile
+                </a>
+
+                <a href="index.html" class="flex items-center gap-2 px-4 py-2.5 text-xs text-red-600 hover:bg-red-50 font-medium transition-all border-t border-gray-50">
+                    <i class="fa-solid fa-right-from-bracket text-sm"></i> Logout
+                </a>
+            </div>
+
+            <div id="notiPanel" class="absolute right-0 top-14 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden z-50 overflow-hidden max-h-[420px] flex flex-col">
+                <div class="p-4 bg-gradient-to-r from-emerald-800 to-teal-900 text-white flex items-center justify-between">
+                    <h4 class="font-bold text-xs uppercase tracking-wider">Notifications</h4>
+                    <span class="text-[10px] bg-emerald-600 px-2 py-0.5 rounded-full font-bold">5 New</span>
+                </div>
+                
+                <div class="overflow-y-auto divide-y divide-gray-50">
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-gift"></i></div>
+                        <div>
+                            <h5 class="text-xs font-bold text-gray-900">New Incentive! 🎉</h5>
+                            <p class="text-[11px] text-gray-500 mt-0.5">Complete 20 trips to earn RM50 extra.</p>
+                        </div>
+                    </div>
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-900">Passenger <span class="font-bold">Aisyah</span> left you a 5-star rating ⭐</h5>
+                        </div>
+                    </div>
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-900">Passenger <span class="font-bold">Daniel Lee</span> left you a 5-star rating ⭐</h5>
+                        </div>
+                    </div>
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-900">Passenger <span class="font-bold">Farah</span> left you a 4-star rating ⭐</h5>
+                        </div>
+                    </div>
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-900">Passenger <span class="font-bold">Jason Tan</span> left you a 5-star rating ⭐</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-white shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="p-6 border-b border-gray-100 relative bg-gradient-to-b from-gray-50 to-white">
+            <button id="closeSidebarBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-lg cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-car text-emerald-600 text-xl"></i>
+                <span class="text-lg font-bold text-gray-900">Jom<span class="text-emerald-600">Ryde</span><span class="text-xs font-normal text-emerald-700 ml-1 uppercase tracking-wider hidden sm:inline">Driver</span></span>
+            </div>
+
+            <div class="flex items-center gap-3 mt-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden shadow-md border border-emerald-500/20">
+                    <img src="driver picture.png" alt="Driver picture" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h5 class="font-bold text-gray-900 text-sm">Muhammad Asyraf 👋</h5>
+                    <p class="text-xs text-gray-400">Driver ID: JR123456</p>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full mt-1">
+                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Online
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-grow p-4 space-y-1 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-solid fa-chart-pie text-base"></i> Dashboard
+            </a>
+            <a href="trips.html" class="flex items-center gap-3 px-4 py-3 bg-emerald-600 text-white font-semibold rounded-xl text-sm shadow-md shadow-emerald-100 transition-all">
+                <i class="fa-solid fa-route text-base"></i> My Trips
+            </a>
+            <a href="earnings.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-solid fa-wallet text-base"></i> Earnings
+            </a>
+            <a href="performance.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-solid fa-gauge-simple-high text-base"></i> Performance
+            </a>
+            <a href="ratings.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-solid fa-star text-base"></i> Ratings & Reviews
+            </a>
+            <a href="profile.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-regular fa-user text-base font-bold"></i> Profile
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-gray-100 bg-gray-50">
+            <a href="index.html" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-bold transition-all text-center">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout Account
+            </a>
+        </div>
+    </div>
+    <div id="overlay" class="fixed inset-0 bg-black/40 z-40 hidden transition-opacity duration-300"></div>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-6 py-8">
+        
+        <div class="mb-6 flex items-center gap-2">
+            <a href="dashboard.html" class="text-xs font-bold text-emerald-600 hover:text-emerald-800 transition-colors flex items-center gap-1">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="mb-8 p-6 bg-gradient-to-r from-emerald-800 to-teal-900 rounded-2xl shadow-md text-white flex flex-col justify-center relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 text-emerald-700/20 text-9xl pointer-events-none transform -rotate-12">
+                <i class="fa-solid fa-route"></i>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">My Trips Analytics 🗺️</h1>
+            <p class="text-xs sm:text-sm text-emerald-200 mt-1 font-light">Monitor booking allocations, active navigations and overall historical logs.</p>
+        </div>   
+
+        <div class="w-full bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-12">
+            
+            <div class="flex border-b border-gray-100 bg-gray-50/50">
+                <button onclick="switchTripTab('ongoing')" id="tabBtn-ongoing" 
+                    class="flex-1 py-4 px-4 text-center font-bold text-xs uppercase tracking-wider border-b-2 border-emerald-600 text-emerald-600 focus:outline-none transition-all duration-200 flex items-center justify-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Ongoing
+                </button>
+                
+                <button onclick="switchTripTab('upcoming')" id="tabBtn-upcoming" 
+                    class="flex-1 py-4 px-4 text-center font-bold text-xs uppercase tracking-wider border-b-2 border-transparent text-gray-400 hover:text-gray-700 focus:outline-none transition-all duration-200 flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-calendar-check text-sm"></i> Upcoming
+                </button>
+                
+                <button onclick="switchTripTab('history')" id="tabBtn-history" 
+                    class="flex-1 py-4 px-4 text-center font-bold text-xs uppercase tracking-wider border-b-2 border-transparent text-gray-400 hover:text-gray-700 focus:outline-none transition-all duration-200 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left text-sm"></i> History (30)
+                </button>
+            </div>
+
+            <div class="p-6 min-h-[380px]">
+                
+                <div id="panel-ongoing" class="trip-panel block">
+                    <div class="flex flex-col items-center justify-center text-center py-16 px-4">
+                        <div class="w-20 h-20 bg-gray-50 border border-gray-100 rounded-full flex items-center justify-center text-gray-300 text-3xl mb-4 shadow-inner">
+                            <i class="fa-solid fa-car-tunnel animate-bounce"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-gray-800">No Active Passenger Ride Orders</h3>
+                        <p class="text-xs text-gray-400 max-w-sm mt-1.5 leading-relaxed">
+                            You currently do not have any real-time active bookings running on the road layout. Switch your toggle status online to start receiving standard ride requests.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="panel-upcoming" class="trip-panel hidden">
+                    <div class="flex flex-col items-center justify-center text-center py-16 px-4">
+                        <div class="w-20 h-20 bg-gray-50 border border-gray-100 rounded-full flex items-center justify-center text-gray-300 text-3xl mb-4 shadow-inner">
+                            <i class="fa-regular fa-calendar-xmark text-amber-400"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-gray-800">No Scheduled Bookings Found</h3>
+                        <p class="text-xs text-gray-400 max-w-sm mt-1.5 leading-relaxed">
+                            There are no advanced or pre-booked passenger schedules reserved for your vehicle matching current time constraints.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="panel-history" class="trip-panel hidden">
+                    <div class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-50 pb-4 gap-3">
+                        <div>
+                            <h3 class="text-sm font-black text-gray-900 uppercase tracking-wide">Historical Passenger Log Summary</h3>
+                            <p class="text-[11px] text-gray-400">Archived analytical reports of your past 30 rides across Kuala Lumpur territory zones.</p>
+                        </div>
+                        <span class="self-start sm:self-center bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                            Flat Rate Fare: RM12.50
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Aisyah Binti Zulkifli</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">16 May 2026 • 2:45 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Great driver and smooth ride! Super friendly and drove carefully throughout the heavy afternoon rain session."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Mid Valley Megamall</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">KL Sentral Station</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Daniel Tan</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">17 May 2026 • 8:15 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Very friendly and arrived right on time. Car was exceptionally clean and smelled refreshing. Highly recommended!"</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Pavilion Bukit Bintang</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Suria KLCC Tower</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Farah Natasha</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">01 May 2026 • 11:30 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">4.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Good service overall. The main route chosen was slightly packed, but managed to clear up safely. Thank you!"</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Nu Sentral Mall</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Bangsar Village Shopping</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Khairul Amri</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">12 May 2026 • 5:50 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Brilliant driving skill, eluded the typical KL evening traffic jam using efficient alternative routes. Awesome job!"</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">KL Tower Observation Deck</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Chinatown Petaling Street</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Mohammad Addam Daniel</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">11 May 2026 • 8:40 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Sangat polite and steady driving style. Selesa tidur dalam car sepanjang perjalanan ke tempat kerja."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Sentul East Residence</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Intermark Mall Ampang</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Jason Lim</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">09 May 2026 • 7:10 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Prompt pickup! The driver greeted warmly and gave excellent local restaurant suggestions around MidValley."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">The Gardens Hotel KL</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Brickfields Little India</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Siti Norhaliza</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">04 May 2026 • 10:15 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Terbaik! Abang driver tolong angkatkan barang luggage berat saya masuk bonet belakang dengan ikhlas."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Hospital Kuala Lumpur</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Titiwangsa Monorail</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Amirul Faiz</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">29 April 2026 • 4:20 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">4.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Pemanduan okay mantap, aircond pun sejuk. Cuma radio slow sangat but overall still comfy."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Berjaya Times Square</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Plaza Low Yat Mall</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Vikneswaran</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">25 April 2026 • 9:30 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Excellent ride experience. Very professional driver and followed the navigation map layout perfectly."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Publika Shopping Gallery</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">MATRADE Exhibition Centre</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Tan Wei Ling</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">20 April 2026 • 1:15 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Highly respectful driver, peaceful audio and beautiful clean seat space. Enjoyed the trip."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Sunway Putra Mall</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">PWTC LRT Station</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Firdaus Rahman</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">15 April 2026 • 6:05 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Mantap abang Asyraf! Kereta laju tapi selamat. Sembang pun best tak bosan."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Kampung Baru Food Haven</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Quill City Mall KL</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Santhiran</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">08 April 2026 • 9:30 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">4.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Good experience, driver was polite. Just the highway traffic congestion was quite stressful."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Cheras Leisure Mall</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Taman Connaught MRT</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Nadhirah Azman</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">05 April 2026 • 4:50 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Pemandu sangat sopan santun. Keadaan dalam kereta pun wangi dan sangat bersih teratur."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Great Eastern Mall</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Jalan Ampang Point</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Zulfadli Rosli</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">30 March 2026 • 11:20 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Sangat punctual! Senang deal dengan driver macam ni, 5 star solid saya bagi."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">KL Eco City Core</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Bangsar LRT Hub</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Syahmi Hazim</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">26 March 2026 • 1:05 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Responsive and gentle driving. Layout system ride terbaik setakat ni."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Dataran Merdeka Square</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Masjid Jamek Interchange</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Anis Suraya</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">19 March 2026 • 3:40 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Driver yang peramah tapi professional. Sangat recommended untuk passenger wanita."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Sogo Department Store</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Medan Tuanku Monorail</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Brandon Lee</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">15 March 2026 • 10:45 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Top tier service! Smooth braking and very cool driving speed along the wet highways."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Lotte Mart Brickfields</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Seputeh KTM Station</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Ahmad Faizol</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">10 March 2026 • 4:10 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">4.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Kereta selesa bersih, driver pemanduan mantap. Cuma GPS problem sikit masa nak cari dropoff."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Wangsa Walk Mall</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Sri Rampai LRT Metro</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Christina Wong</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">05 March 2026 • 2:15 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Prompt response and super tidy vehicle setup. Highly reliable service."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Fahrenheit88 Complex</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Lot 10 Shopping Hub</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Hafizuddin</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">28 February 2026 • 3:30 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Ride gempak, bro Asyraf drive relax dan tak gelojoh di celah trafik."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Setapak Central Mall</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Danau Kota Commercial</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Kumar Nair</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">22 February 2026 • 8:50 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Very safe driver, polite behavior and followed all security guidelines."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Sentul West Station</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Chow Kit Bazaar Central</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Nurul Hidayah</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">17 February 2026 • 11:45 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Alhamdulillah ride selamat sampai destinasi. Suka bauan pandan dalam kereta abang."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Keramat Mall Complex</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Jelatek LRT Station</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Syed Iskandar</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">12 February 2026 • 8:55 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">4.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Good and professional. Slight delay in pickup due to morning rush hour, but acceptable."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Bandar Tasik Selatan BTS</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Taman Connaught Hub</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Michelle Ng</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">08 February 2026 • 2:30 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Awesome experience, the cabin mood layout was extremely calm and comfortable."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Plaza Mont Kiara</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Solaris Dutamas Centre</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Arif Fahmi</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">02 February 2026 • 6:15 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Steady bro! Suka cara dia drive tak meluru masuk corner."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Pantai Dalam KTM</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Universiti LRT Station</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Ridhwan Hakim</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">29 January 2026 • 10:10 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Pemandu terbaik, mesra berbual dan hormat kehendak customer."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">KLCC Convention Centre</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Bukit Nanas Monorail</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Fatin Syazwani</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">23 January 2026 • 4:45 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Smooth braking style! Saya jenis mudah mabuk kereta tapi naik ni selesa gila."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Pudu Sentral Terminal</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Hang Tuah Station</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Divya Pillay</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">18 January 2026 • 12:35 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Clean car layout, lovely music selection. Truly a majestic journey experience."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Masjid Negara Malaysia</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Pasar Seni Complex</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Taufiq Hidayat</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">11 January 2026 • 6:20 PM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">4.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Puas hati dengan servis driver, cuma bonnet penuh sikit dengan barang peribadi."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">Kampung Baru Station</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Chow Kit Road Market</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50/60 border border-gray-200/60 rounded-xl p-4 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h4 class="text-xs font-black text-gray-900">Siti Aminah</h4>
+                                        <p class="text-[10px] text-gray-400 font-medium">05 January 2026 • 9:15 AM</p>
+                                    </div>
+                                    <span class="text-xs text-amber-500 font-bold bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">5.0 ⭐</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 bg-white p-2 rounded border border-gray-100 italic mt-1 mb-3">"Terbaik! Memang tak menyesal amik JomRyde dengan driver hebat macam abang Asyraf ni."</p>
+                                <div class="space-y-1 text-[11px] font-medium border-t border-gray-100 pt-2.5">
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-circle-dot text-[8px] text-emerald-600"></i> <span class="truncate">KLCC Park Fountain</span></div>
+                                    <div class="flex items-center gap-1.5 text-gray-600"><i class="fa-solid fa-location-dot text-[9px] text-red-500"></i> <span class="truncate">Ampang Park Complex</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                                <span class="font-black text-gray-900">RM 12.50</span>
+                                <a href="ratings.html" class="text-emerald-600 font-bold hover:underline">See All Reviews <i class="fa-solid fa-chevron-right text-[9px]"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-gray-400 border-t border-slate-900 w-full text-xs mt-16">
+        <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+            
+            <div class="space-y-3">
+                <div class="flex items-center justify-center md:justify-start gap-2 text-xl font-bold text-white">
+                    <i class="fa-solid fa-car text-emerald-400"></i>
+                    <span>Jom<span class="text-emerald-400">Ryde</span><span class="text-xs font-normal text-emerald-300 ml-1 uppercase tracking-wider hidden sm:inline">Driver</span></span>
+                </div>
+                <p class="text-gray-500 leading-relaxed text-xs max-w-sm mx-auto md:mx-0">
+                    Empowering drivers with intelligent performance tracking analytics tools. Drive smart, earn more.
+                </p>
+            </div>
+            
+            <div class="flex flex-col items-center justify-center w-full">
+                <div class="w-full max-w-md">
+                    <h4 class="text-white font-bold mb-4 text-sm tracking-wide text-center">Quick Links</h4>
+                    <div class="grid grid-cols-3 gap-x-4 gap-y-3 text-center font-medium">
+                        <a href="dashboard.html" class="hover:text-emerald-400 transition-colors">Dashboard</a>
+                        <a href="trips.html" class="hover:text-emerald-400 transition-colors">My Trips</a>
+                        <a href="earnings.html" class="hover:text-emerald-400 transition-colors">Earnings</a>
+                        
+                        <a href="performance.html" class="hover:text-emerald-400 transition-colors">Performance</a>
+                        <a href="ratings.html" class="hover:text-emerald-400 transition-colors">Ratings</a>
+                        <a href="profile.html" class="hover:text-emerald-400 transition-colors">Profile</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end justify-center">
+                <div class="text-center md:text-right">
+                    <h4 class="text-white font-bold mb-4 text-sm tracking-wide">Connect With Us</h4>
+                    <div class="flex justify-center md:justify-end gap-3 text-base mt-2">
+                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300"><i class="fa-brands fa-twitter text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="border-t border-slate-900/60 py-5 text-center text-gray-600 text-[11px] font-medium tracking-wide">
+            &copy; 2026 JomRyde Inc. All rights reserved. Built for Assignment Purposes.
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. ORIGINAL CORE COMPONENT SELECTION ---
+        const menuBtn = document.getElementById('menuBtn');
+        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        
+        const notiBtn = document.getElementById('notiBtn');
+        const notiPanel = document.getElementById('notiPanel');
+        const profileDropdownBtn = document.getElementById('profileDropdownBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        // --- 2. SIDEBAR DRAWER TOGGLE EVENT HANDLERS ---
+        menuBtn.addEventListener('click', () => { sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); });
+        closeSidebarBtn.addEventListener('click', () => { sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); });
+        overlay.addEventListener('click', () => { sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); });
+
+        // --- 3. NOTIFICATION POPUP PANEL INTERACTION ---
+        notiBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notiPanel.classList.toggle('hidden');
+            profileDropdown.classList.add('hidden'); 
+        });
+
+        // --- 4. PROFILE NAVIGATION DROPDOWN INTERACTION ---
+        profileDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+            notiPanel.classList.add('hidden'); 
+        });
+
+        // --- 5. GLOBAL CLICK AREA DISMISSAL CLOSE HANDLER ---
+        document.addEventListener('click', () => {
+            notiPanel.classList.add('hidden');
+            profileDropdown.classList.add('hidden');
+        });
+
+        // --- 6. NEW DYNAMIC TRIP TAB SWITCHER FUNCTION ---
+        function switchTripTab(tabName) {
+            // Sembunyikan semua panel kandungan terlebih dahulu
+            const panels = document.querySelectorAll('.trip-panel');
+            panels.forEach(panel => {
+                panel.classList.remove('block');
+                panel.classList.add('hidden');
+            });
+
+            // Reset gaya semua butang tab ke keadaan tidak aktif (kelabu)
+            const buttons = document.querySelectorAll('button[id^="tabBtn-"]');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-emerald-600', 'text-emerald-600');
+                btn.classList.add('border-transparent', 'text-gray-400');
+            });
+
+            // Paparkan panel yang aktif
+            const targetPanel = document.getElementById('panel-' + tabName);
+            if (targetPanel) {
+                targetPanel.classList.remove('hidden');
+                targetPanel.classList.add('block');
+            }
+
+            // Berikan highlight warna hijau emerald pada butang tab yang diklik
+            const targetButton = document.getElementById('tabBtn-' + tabName);
+            if (targetButton) {
+                targetButton.classList.remove('border-transparent', 'text-gray-400');
+                targetButton.classList.add('border-emerald-600', 'text-emerald-600');
+            }
+        }
+    </script>
+</body>
+</html>

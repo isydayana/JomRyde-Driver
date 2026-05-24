@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JomRyde - Driver Earnings</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Custom scrollbar tuning for transaction box */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-city-pattern min-h-screen font-sans antialiased text-gray-800 flex flex-col relative overflow-x-hidden">
+
+    <header class="bg-gradient-to-r from-emerald-800 to-teal-950 shadow-lg sticky top-0 z-40 w-full">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
+        <div class="flex items-center gap-4">
+            <button id="menuBtn" class="text-white text-xl focus:outline-none hover:text-emerald-400 transition-all cursor-pointer">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <a href="dashboard.html" class="flex items-center gap-2 text-xl font-bold text-white hover:opacity-90 transition-all cursor-pointer">
+                <i class="fa-solid fa-car text-emerald-400"></i>
+                <span>Jom<span class="text-emerald-400">Ryde</span><span class="text-xs font-normal text-emerald-300 ml-1 uppercase tracking-wider hidden sm:inline">Driver</span></span>
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4 relative">
+            
+            <button id="notiBtn" class="text-white relative text-lg hover:text-emerald-400 transition-all cursor-pointer p-2 bg-white/5 rounded-full backdrop-blur-sm focus:outline-none">
+                <i class="fa-solid fa-bell"></i>
+                <span class="absolute top-1.5 right-1.5 bg-red-500 w-2 h-2 rounded-full"></span>
+            </button>
+
+            <button id="profileDropdownBtn" class="w-11 h-11 rounded-full border-2 border-emerald-400/60 overflow-hidden shadow-sm hover:border-emerald-300 transition-all cursor-pointer focus:outline-none flex items-center justify-center">
+                <img src="driver picture.png" alt="Driver Profile" class="w-full h-full object-cover scale-110">
+            </button>
+
+            <div id="profileDropdown" class="absolute right-0 top-14 w-48 bg-white rounded-xl shadow-xl border border-gray-100 hidden py-2 z-50">
+                <div class="px-4 py-2 border-b border-gray-50">
+                    <p class="text-xs font-bold text-gray-900">Muhammad Asyraf</p>
+                    <p class="text-[10px] text-gray-400">Driver Account</p>
+                </div>
+                
+                <a href="profile.html" class="flex items-center gap-2 px-4 py-2.5 text-xs text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition-all">
+                    <i class="fa-regular fa-user text-sm"></i> See Profile
+                </a>
+
+                <a href="index.html" class="flex items-center gap-2 px-4 py-2.5 text-xs text-red-600 hover:bg-red-50 font-medium transition-all border-t border-gray-50">
+                    <i class="fa-solid fa-right-from-bracket text-sm"></i> Logout
+                </a>
+            </div>
+
+            <div id="notiPanel" class="absolute right-0 top-14 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden z-50 overflow-hidden max-h-[420px] flex flex-col">
+                <div class="p-4 bg-gradient-to-r from-emerald-800 to-teal-900 text-white flex items-center justify-between">
+                    <h4 class="font-bold text-xs uppercase tracking-wider">Notifications</h4>
+                    <span class="text-[10px] bg-emerald-600 px-2 py-0.5 rounded-full font-bold">5 New</span>
+                </div>
+                
+                <div class="overflow-y-auto divide-y divide-gray-50">
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-gift"></i></div>
+                        <div>
+                            <h5 class="text-xs font-bold text-gray-900">New Incentive! 🎉</h5>
+                            <p class="text-[11px] text-gray-500 mt-0.5">Complete 20 trips to earn RM50 extra.</p>
+                        </div>
+                    </div>
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-900">Passenger <span class="font-bold">Aisyah</span> left you a 5-star rating ⭐</h5>
+                        </div>
+                    </div>
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-900">Passenger <span class="font-bold">Daniel Lee</span> left you a 5-star rating ⭐</h5>
+                        </div>
+                    </div>
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-900">Passenger <span class="font-bold">Farah</span> left you a 4-star rating ⭐</h5>
+                        </div>
+                    </div>
+                    <div class="p-3.5 hover:bg-gray-50 flex gap-3 items-start transition-all">
+                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <h5 class="text-xs font-semibold text-gray-900">Passenger <span class="font-bold">Jason Tan</span> left you a 5-star rating ⭐</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-white shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="p-6 border-b border-gray-100 relative bg-gradient-to-b from-gray-50 to-white">
+            <button id="closeSidebarBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-lg cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-car text-emerald-600 text-xl"></i>
+                <span class="text-lg font-bold text-gray-900">Jom<span class="text-emerald-600">Ryde</span><span class="text-xs font-normal text-emerald-700 ml-1 uppercase tracking-wider hidden sm:inline">Driver</span></span>
+            </div>
+            <div class="flex items-center gap-3 mt-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden shadow-md border border-emerald-500/20">
+                    <img src="driver picture.png" alt="Driver picture" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h5 class="font-bold text-gray-900 text-sm">Muhammad Asyraf 👋</h5>
+                    <p class="text-xs text-gray-400">Driver ID: JR123456</p>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full mt-1">
+                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Online
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-grow p-4 space-y-1 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-solid fa-chart-pie text-base"></i> Dashboard
+            </a>
+            <a href="trips.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-solid fa-route text-base"></i> My Trips
+            </a>
+            <a href="earnings.html" class="flex items-center gap-3 px-4 py-3 bg-emerald-600 text-white font-semibold rounded-xl text-sm shadow-md shadow-emerald-100 transition-all">
+                <i class="fa-solid fa-wallet text-base"></i> Earnings
+            </a>
+            <a href="performance.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-solid fa-gauge-simple-high text-base"></i> Performance
+            </a>
+            <a href="ratings.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-solid fa-star text-base"></i> Ratings & Reviews
+            </a>
+            <a href="profile.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-emerald-600 rounded-xl text-sm font-medium transition-all">
+                <i class="fa-regular fa-user text-base font-bold"></i> Profile
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-gray-100 bg-gray-50">
+            <a href="index.html" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-bold transition-all text-center">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout Account
+            </a>
+        </div>
+    </div>
+
+    <div id="overlay" class="fixed inset-0 bg-black/40 z-40 hidden transition-opacity duration-300"></div>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        
+        <div class="mb-8 p-6 bg-gradient-to-r from-emerald-800 to-teal-900 rounded-2xl shadow-md text-white flex flex-col justify-center relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 text-emerald-700/20 text-9xl pointer-events-none transform -rotate-12">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Driver Earnings 💰</h1>
+            <p class="text-xs sm:text-sm text-emerald-200 mt-1 font-light">Track your payouts, visual growth metrics, and ride revenue strategies.</p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+            
+            <div id="filterDropdownTrigger" class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between hover:-translate-y-1 hover:shadow-lg hover:border-emerald-200 transition-all duration-300 group cursor-pointer relative">
+                <div>
+                    <div class="flex items-center gap-1">
+                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider group-hover:text-emerald-600 transition-colors">Total Earnings</p>
+                        <i class="fa-solid fa-chevron-down text-[9px] text-gray-400 group-hover:text-emerald-600 transition-colors mt-0.5"></i>
+                    </div>
+                    <h3 id="statTotalEarnings" class="text-xl sm:text-2xl font-black text-gray-900 mt-1">RM 0.00</h3>
+                </div>
+                <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-base group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm shrink-0">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                </div>
+
+                <div id="timeframeFilterMenu" class="absolute left-0 top-full mt-2 w-44 bg-white rounded-xl shadow-xl border border-gray-100 hidden py-1.5 z-30 transition-all overflow-hidden animate-fadeIn">
+                    <button class="w-full text-left flex items-center justify-between px-4 py-2 text-xs font-bold text-emerald-700 bg-emerald-50/60">
+                        <span>This Week Only</span>
+                        <i class="fa-solid fa-check text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between hover:-translate-y-1 hover:shadow-lg hover:border-blue-200 transition-all duration-300 group">
+                <div>
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider group-hover:text-blue-600 transition-colors">Trips Completed</p>
+                    <h3 id="statTrips" class="text-xl sm:text-2xl font-black text-gray-900 mt-1">0 Rides</h3>
+                </div>
+                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-base group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm shrink-0">
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between hover:-translate-y-1 hover:shadow-lg hover:border-amber-200 transition-all duration-300 group">
+                <div>
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider group-hover:text-amber-600 transition-colors">Total Online Time</p>
+                    <h3 id="statHours" class="text-xl sm:text-2xl font-black text-gray-900 mt-1">0h 0m</h3>
+                </div>
+                <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-base group-hover:bg-amber-600 group-hover:text-white transition-all duration-300 shadow-sm shrink-0">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between hover:-translate-y-1 hover:shadow-lg hover:border-purple-200 transition-all duration-300 group">
+                <div>
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider group-hover:text-purple-600 transition-colors">Bonus Incentives</p>
+                    <h3 id="statBonus" class="text-xl sm:text-2xl font-black text-gray-900 mt-1">RM 0.00</h3>
+                </div>
+                <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-base group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 shadow-sm shrink-0">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+            
+            <div class="lg:col-span-2 bg-white p-5 sm:p-6 rounded-2xl shadow-md border border-gray-100 h-full flex flex-col justify-between">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                    <div>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Revenue Stream Visualization</p>
+                        <h2 class="text-xl font-extrabold text-gray-900 mt-0.5">Weekly Performance Growth Analytics</h2>
+                    </div>
+                    <span class="w-fit text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-100 flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-trend-up"></i> +24.8% growth margin
+                    </span>
+                </div>
+                <div class="relative w-full h-72 sm:h-96 lg:h-[420px]">
+                    <canvas id="loopingLineChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 sm:gap-8 h-full">
+                
+                <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-md border border-gray-100">
+                    <div class="mb-4">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Daily Breakdown</p>
+                        <h2 class="text-base font-extrabold text-gray-900 mt-0.5">Earnings Distribution Breakdown</h2>
+                    </div>
+                    <div class="relative w-full h-48 sm:h-56">
+                        <canvas id="verticalBarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col">
+                    <div class="mb-4 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Recent Activity Ledger</p>
+                            <h2 class="text-base font-extrabold text-gray-900 mt-0.5">Recent Payout Transactions</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3 max-h-[260px] overflow-y-auto pr-1 custom-scrollbar">
+                        
+   
+    <div class="space-y-3 max-h-[260px] overflow-y-auto pr-1 custom-scrollbar">
+                        
+    <!-- 20-Trip Target Incentive -->
+    <div class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-purple-50 to-indigo-50 hover:scale-[1.01] transition-all border border-purple-100 gap-4">
+        <div class="flex items-center gap-2.5 flex-1">
+            <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center text-xs shadow-sm shrink-0"><i class="fa-solid fa-trophy"></i></div>
+            <div>
+                <p class="text-xs font-black text-purple-950">20-Trip Target Incentive 🎉</p>
+                <p class="text-[10px] text-purple-500 font-medium">Weekly Challenge Bonus</p>
+            </div>
+        </div>
+        <span class="text-xs font-black text-purple-700 shrink-0 text-right">+ RM 50.00</span>
+    </div>
+
+    <!-- Monday -->
+    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 hover:bg-emerald-50/30 transition-all border border-gray-100 gap-4">
+        <div class="flex items-center gap-2.5 flex-1">
+            <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-car"></i></div>
+            <div>
+                <p class="text-xs font-bold text-gray-800">Monday Base Fare Accumulation</p>
+                <p class="text-[10px] text-gray-400 leading-tight">Mon, 8:15 PM • Incl. 2 passenger tips (RM5 each)</p>
+            </div>
+        </div>
+        <span class="text-xs font-black text-emerald-600 shrink-0 text-right">+ RM 180.00</span>
+    </div>
+
+    <!-- Tuesday -->
+    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 hover:bg-emerald-50/30 transition-all border border-gray-100 gap-4">
+        <div class="flex items-center gap-2.5 flex-1">
+            <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-car"></i></div>
+            <div>
+                <p class="text-xs font-bold text-gray-800">Tuesday Base Fare Accumulation</p>
+                <p class="text-[10px] text-gray-400 leading-tight">Tue, 9:00 PM • Incl. 1 passenger tip (RM5)</p>
+            </div>
+        </div>
+        <span class="text-xs font-black text-emerald-600 shrink-0 text-right">+ RM 120.00</span>
+    </div>
+
+    <!-- Wednesday -->
+    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 hover:bg-emerald-50/30 transition-all border border-gray-100 gap-4">
+        <div class="flex items-center gap-2.5 flex-1">
+            <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-car"></i></div>
+            <div>
+                <p class="text-xs font-bold text-gray-800">Wednesday Base Fare Accumulation</p>
+                <p class="text-[10px] text-gray-400 leading-tight">Wed, 7:30 PM</p>
+            </div>
+        </div>
+        <span class="text-xs font-black text-emerald-600 shrink-0 text-right">+ RM 150.00</span>
+    </div>
+
+    <!-- Thursday -->
+    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 hover:bg-emerald-50/30 transition-all border border border-gray-100 gap-4">
+        <div class="flex items-center gap-2.5 flex-1">
+            <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-car"></i></div>
+            <div>
+                <p class="text-xs font-bold text-gray-800">Thursday Base Fare Accumulation</p>
+                <p class="text-[10px] text-gray-400 leading-tight">Thu, 8:00 PM • Incl. 2 passenger tips (RM5 each)</p>
+            </div>
+        </div>
+        <span class="text-xs font-black text-emerald-600 shrink-0 text-right">+ RM 240.00</span>
+    </div>
+
+    <!-- Friday -->
+    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 hover:bg-emerald-50/30 transition-all border border border-gray-100 gap-4">
+        <div class="flex items-center gap-2.5 flex-1">
+            <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-car"></i></div>
+            <div>
+                <p class="text-xs font-bold text-gray-800">Friday Base Fare Accumulation</p>
+                <p class="text-[10px] text-gray-400 leading-tight">Fri, 9:45 PM • Incl. 1 passenger tip (RM5)</p>
+            </div>
+        </div>
+        <span class="text-xs font-black text-emerald-600 shrink-0 text-right">+ RM 200.00</span>
+    </div>
+
+    <!-- Saturday -->
+    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 hover:bg-emerald-50/30 transition-all border border border-gray-100 gap-4">
+        <div class="flex items-center gap-2.5 flex-1">
+            <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-car"></i></div>
+            <div>
+                <p class="text-xs font-bold text-gray-800">Saturday Base Fare Accumulation</p>
+                <p class="text-[10px] text-gray-400 leading-tight">Sat, 11:30 PM • Incl. 2 passenger tips (RM5 each)</p>
+            </div>
+        </div>
+        <span class="text-xs font-black text-emerald-600 shrink-0 text-right">+ RM 260.00</span>
+    </div>
+
+    <!-- Sunday -->
+    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50/50 hover:bg-emerald-50/30 transition-all border border-gray-100 gap-4">
+        <div class="flex items-center gap-2.5 flex-1">
+            <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-car"></i></div>
+            <div>
+                <p class="text-xs font-bold text-gray-800">Sunday Base Fare Accumulation</p>
+                <p class="text-[10px] text-gray-400 leading-tight">Sun, 10:00 PM • Incl. 1 passenger tip (RM5)</p>
+            </div>
+        </div>
+        <span class="text-xs font-black text-emerald-600 shrink-0 text-right">+ RM 305.00</span>
+    </div>
+
+</div>
+                    </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-gray-400 border-t border-slate-900 w-full text-xs mt-16">
+        <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+            
+            <div class="space-y-3">
+                <div class="flex items-center justify-center md:justify-start gap-2 text-xl font-bold text-white">
+                    <i class="fa-solid fa-car text-emerald-400"></i>
+                    <span>Jom<span class="text-emerald-400">Ryde</span><span class="text-xs font-normal text-emerald-300 ml-1 uppercase tracking-wider hidden sm:inline">Driver</span></span>
+                </div>
+                <p class="text-gray-500 leading-relaxed text-xs max-w-sm mx-auto md:mx-0">
+                    Empowering drivers with intelligent performance tracking analytics tools. Drive smart, earn more.
+                </p>
+            </div>
+            
+            <div class="flex flex-col items-center justify-center w-full">
+                <div class="w-full max-w-md">
+                    <h4 class="text-white font-bold mb-4 text-sm tracking-wide text-center">Quick Links</h4>
+                    <!-- Ditukar kepada grid-cols-3 supaya maintain susunan 3 atas, 3 bawah -->
+                    <div class="grid grid-cols-3 gap-x-4 gap-y-3 text-center font-medium">
+                        <a href="dashboard.html" class="hover:text-emerald-400 transition-colors">Dashboard</a>
+                        <a href="trips.html" class="hover:text-emerald-400 transition-colors">My Trips</a>
+                        <a href="earnings.html" class="hover:text-emerald-400 transition-colors">Earnings</a>
+                        
+                        <a href="performance.html" class="hover:text-emerald-400 transition-colors">Performance</a>
+                        <a href="ratings.html" class="hover:text-emerald-400 transition-colors">Ratings</a>
+                        <a href="profile.html" class="hover:text-emerald-400 transition-colors">Profile</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end justify-center">
+                <div class="text-center md:text-right">
+                    <h4 class="text-white font-bold mb-4 text-sm tracking-wide">Connect With Us</h4>
+                    <div class="flex justify-center md:justify-end gap-3 text-base mt-2">
+                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300"><i class="fa-brands fa-twitter text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="border-t border-slate-900/60 py-5 text-center text-gray-600 text-[11px] font-medium tracking-wide">
+            &copy; 2026 JomRyde Inc. All rights reserved. Built for Assignment Purposes.
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. CORE UI POPUP & DRAWER CONTROLLERS ---
+        const menuBtn = document.getElementById('menuBtn');
+        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const notiBtn = document.getElementById('notiBtn');
+        const notiPanel = document.getElementById('notiPanel');
+        const profileDropdownBtn = document.getElementById('profileDropdownBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const filterDropdownTrigger = document.getElementById('filterDropdownTrigger');
+        const timeframeFilterMenu = document.getElementById('timeframeFilterMenu');
+
+        menuBtn.addEventListener('click', () => { sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); });
+        closeSidebarBtn.addEventListener('click', () => { sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); });
+        overlay.addEventListener('click', () => { sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); });
+
+        notiBtn.addEventListener('click', (e) => { e.stopPropagation(); notiPanel.classList.toggle('hidden'); profileDropdown.classList.add('hidden'); });
+        profileDropdownBtn.addEventListener('click', (e) => { e.stopPropagation(); profileDropdown.classList.toggle('hidden'); notiPanel.classList.add('hidden'); });
+        
+        filterDropdownTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            timeframeFilterMenu.classList.toggle('hidden');
+            notiPanel.classList.add('hidden');
+            profileDropdown.classList.add('hidden');
+        });
+
+        document.addEventListener('click', () => {
+            notiPanel.classList.add('hidden');
+            profileDropdown.classList.add('hidden');
+            timeframeFilterMenu.classList.add('hidden');
+        });
+
+
+        // --- 2. GLOBAL ODOMETER COUNT-UP ENGINE FOR ALL CARDS ---
+        function animateCardValues(id, start, end, duration, formatType) {
+            const obj = document.getElementById(id);
+            const range = end - start;
+            const minTimer = 30;
+            let stepTime = Math.abs(Math.floor(duration / range));
+            stepTime = Math.max(stepTime, minTimer);
+            
+            const startTime = new Date().getTime();
+            const endTime = startTime + duration;
+            let timer;
+            
+            function run() {
+                const now = new Date().getTime();
+                const remaining = Math.max((endTime - now) / duration, 0);
+                const value = end - (remaining * range);
+                
+                if (formatType === 'currency') {
+                    obj.innerHTML = "RM " + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                } else if (formatType === 'rides') {
+                    obj.innerHTML = Math.floor(value) + " Rides";
+                } else if (formatType === 'time') {
+                    // Lock fixed dynamic presentation to match exactly 60h 15m
+                    let progressRatio = (value / end);
+                    let calculatedMins = Math.floor(progressRatio * 15);
+                    obj.innerHTML = `${Math.floor(value)}h ${calculatedMins}m`;
+                }
+                
+                if (value >= end) {
+                    clearInterval(timer);
+                    if (formatType === 'currency') obj.innerHTML = "RM " + end.toFixed(2);
+                    if (formatType === 'rides') obj.innerHTML = end + " Rides";
+                    if (formatType === 'time') obj.innerHTML = "60h 15m";
+                }
+            }
+            timer = setInterval(run, stepTime);
+            run();
+        }
+
+        // Trigger safe loaded sequence parameters
+        window.addEventListener('DOMContentLoaded', () => {
+            animateCardValues("statTotalEarnings", 0, 1455.00, 1500, 'currency');
+            animateCardValues("statTrips", 0, 108, 1500, 'rides');
+            animateCardValues("statHours", 0, 60, 1500, 'time');
+            animateCardValues("statBonus", 0, 50.00, 1500, 'currency'); // Match total incentive values
+        });
+
+
+        // --- 3. CHARTJS ENGINE: LINE LOOP & BOUNCING VERTICAL BAR ---
+        
+        // Data Hari: Isnin (180), Selasa (120), Rabu (150), Khamis (240), Jumaat (200), Sabtu (260), Ahad (305)
+        const dailyDataArray = [180, 120, 150, 240, 200, 260, 305];
+
+        // A. Looping Line Chart Setup
+        const ctxLine = document.getElementById('loopingLineChart').getContext('2d');
+        const gradientLineFill = ctxLine.createLinearGradient(0, 0, 0, 400);
+        gradientLineFill.addColorStop(0, 'rgba(16, 185, 129, 0.4)');
+        gradientLineFill.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+
+        new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Daily Performance (RM)',
+                    data: dailyDataArray,
+                    borderColor: '#10b981',
+                    backgroundColor: gradientLineFill,
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.3,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#10b981',
+                    pointBorderWidth: 2,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { color: '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                },
+                animations: {
+                    radius: {
+                        duration: 1000,
+                        easing: 'linear',
+                        loop: true,
+                        from: 5,
+                        to: 8,
+                        alternate: true
+                    },
+                    borderWidth: {
+                        duration: 1200,
+                        easing: 'easeInOutQuad',
+                        loop: true,
+                        from: 4,
+                        to: 6,
+                        alternate: true
+                    }
+                }
+            }
+        });
+
+        // B. Vertical Bar Chart Setup
+        const ctxBar = document.getElementById('verticalBarChart').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Earnings Breakdown',
+                    data: dailyDataArray,
+                    backgroundColor: '#0284c7',
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    hoverBackgroundColor: '#0369a1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                animation: {
+                    duration: 1800,
+                    easing: 'easeOutBounce'
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f8fafc' }, ticks: { color: '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
